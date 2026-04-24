@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autenticação Segura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+  <body>
+    <div class="app-container">
+      <!-- Painel esquerdo decorativo (desktop only) -->
+      <aside class="side-panel" aria-hidden="true">
+        <div class="side-panel__inner">
+          <div class="side-panel__illustration">
+            <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M100 20 L165 50 L165 110 Q165 160 100 190 Q35 160 35 110 L35 50 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+              <rect x="75" y="100" width="50" height="42" rx="6" fill="rgba(255,255,255,0.9)"/>
+              <path d="M85 100 L85 85 Q85 72 100 72 Q115 72 115 85 L115 100" stroke="rgba(255,255,255,0.9)" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <circle cx="100" cy="119" r="6" fill="rgba(26,115,232,0.85)"/>
+              <rect x="97" y="119" width="6" height="10" rx="2" fill="rgba(26,115,232,0.85)"/>
+              <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.4)"/>
+              <circle cx="140" cy="65" r="2" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="55" cy="140" r="2.5" fill="rgba(255,255,255,0.35)"/>
+              <circle cx="148" cy="138" r="3" fill="rgba(255,255,255,0.3)"/>
+            </svg>
+          </div>
+          <div class="side-panel__content">
+            <h2 class="side-panel__title">Acesso Seguro</h2>
+            <p class="side-panel__subtitle">Sua identidade protegida com autenticação moderna e confiável.</p>
+          </div>
+          <div class="side-panel__dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Painel direito: formulários -->
+      <main class="form-panel" role="main">
+        <!-- Região de notificações acessíveis para leitores de tela -->
+        <div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+        <!-- ===== TELA: LOGIN ===== -->
+        <section id="screen-login" class="screen screen--active" aria-labelledby="login-title" role="region">
+          <div class="screen__header">
+            <div class="brand-logo" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="10" fill="#1a73e8"/>
+                <path d="M20 10 L29 15 L29 24 Q29 30 20 33 Q11 30 11 24 L11 15 Z" fill="white" opacity="0.9"/>
+                <rect x="16" y="22" width="8" height="7" rx="1.5" fill="#1a73e8"/>
+                <path d="M17.5 22 L17.5 19 Q17.5 16 20 16 Q22.5 16 22.5 19 L22.5 22" stroke="#1a73e8" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h1 class="screen__title" id="login-title">Entrar</h1>
+            <p class="screen__subtitle">Use sua conta para continuar</p>
+          </div>
+
+          <form id="form-login" class="form" novalidate autocomplete="on">
+            <div class="field" id="field-login-email">
+              <input type="email" id="login-email" name="email" class="field__input"
+                autocomplete="email" aria-required="true"
+                aria-describedby="login-email-error" placeholder=" " />
+              <label for="login-email" class="field__label">E-mail</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <span id="login-email-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div class="field" id="field-login-password">
+              <input type="password" id="login-password" name="password" class="field__input"
+                autocomplete="current-password" aria-required="true"
+                aria-describedby="login-password-error" placeholder=" " />
+              <label for="login-password" class="field__label">Senha</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <button type="button" class="field__eye" aria-label="Mostrar senha" data-target="login-password">
+                <svg class="eye-show" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                <svg class="eye-hide" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+              </button>
+              <span id="login-password-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div id="login-message" class="form-message" aria-live="polite" role="status"></div>
+
+            <button type="submit" class="btn btn--primary btn--full" id="btn-login">
+              <span class="btn__label">Entrar</span>
+              <span class="btn__ripple" aria-hidden="true"></span>
+            </button>
+
+            <div class="form-links">
+              <button type="button" class="link-btn" id="go-forgot">Esqueci minha senha</button>
+            </div>
+          </form>
+
+          <div class="screen__footer">
+            <span class="footer-text">Não tem uma conta?</span>
+            <button type="button" class="link-btn link-btn--accent" id="go-register">Criar conta</button>
+          </div>
+        </section>
+
+        <!-- ===== TELA: CRIAR CONTA ===== -->
+        <section id="screen-register" class="screen" aria-labelledby="register-title" role="region" aria-hidden="true">
+          <div class="screen__header">
+            <div class="brand-logo" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="10" fill="#1a73e8"/>
+                <path d="M20 10 L29 15 L29 24 Q29 30 20 33 Q11 30 11 24 L11 15 Z" fill="white" opacity="0.9"/>
+                <rect x="16" y="22" width="8" height="7" rx="1.5" fill="#1a73e8"/>
+                <path d="M17.5 22 L17.5 19 Q17.5 16 20 16 Q22.5 16 22.5 19 L22.5 22" stroke="#1a73e8" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h1 class="screen__title" id="register-title">Criar conta</h1>
+            <p class="screen__subtitle">Preencha os dados para se registrar</p>
+          </div>
+
+          <form id="form-register" class="form" novalidate autocomplete="on">
+            <div class="field" id="field-reg-name">
+              <input type="text" id="reg-name" name="name" class="field__input"
+                autocomplete="name" aria-required="true"
+                aria-describedby="reg-name-error" placeholder=" " />
+              <label for="reg-name" class="field__label">Nome completo</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <span id="reg-name-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div class="field" id="field-reg-email">
+              <input type="email" id="reg-email" name="email" class="field__input"
+                autocomplete="email" aria-required="true"
+                aria-describedby="reg-email-error" placeholder=" " />
+              <label for="reg-email" class="field__label">E-mail</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <span id="reg-email-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div class="field" id="field-reg-password">
+              <input type="password" id="reg-password" name="password" class="field__input"
+                autocomplete="new-password" aria-required="true"
+                aria-describedby="reg-password-error reg-password-hint" placeholder=" " />
+              <label for="reg-password" class="field__label">Senha</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <button type="button" class="field__eye" aria-label="Mostrar senha" data-target="reg-password">
+                <svg class="eye-show" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                <svg class="eye-hide" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+              </button>
+              <span id="reg-password-hint" class="field__hint">Mínimo de 6 caracteres</span>
+              <span id="reg-password-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div class="field" id="field-reg-confirm">
+              <input type="password" id="reg-confirm" name="confirm" class="field__input"
+                autocomplete="new-password" aria-required="true"
+                aria-describedby="reg-confirm-error" placeholder=" " />
+              <label for="reg-confirm" class="field__label">Confirmar senha</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <span id="reg-confirm-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div id="register-message" class="form-message" aria-live="polite" role="status"></div>
+
+            <button type="submit" class="btn btn--primary btn--full" id="btn-register">
+              <span class="btn__label">Criar conta</span>
+              <span class="btn__ripple" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <div class="screen__footer">
+            <span class="footer-text">Já tem uma conta?</span>
+            <button type="button" class="link-btn link-btn--accent" id="go-login-from-register">Entrar</button>
+          </div>
+        </section>
+
+        <!-- ===== TELA: RECUPERAR SENHA ===== -->
+        <section id="screen-forgot" class="screen" aria-labelledby="forgot-title" role="region" aria-hidden="true">
+          <div class="screen__header">
+            <div class="brand-logo" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="10" fill="#1a73e8"/>
+                <path d="M20 10 L29 15 L29 24 Q29 30 20 33 Q11 30 11 24 L11 15 Z" fill="white" opacity="0.9"/>
+                <rect x="16" y="22" width="8" height="7" rx="1.5" fill="#1a73e8"/>
+                <path d="M17.5 22 L17.5 19 Q17.5 16 20 16 Q22.5 16 22.5 19 L22.5 22" stroke="#1a73e8" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h1 class="screen__title" id="forgot-title">Recuperar senha</h1>
+            <p class="screen__subtitle">Informe seu e-mail para receber as instruções</p>
+          </div>
+
+          <form id="form-forgot" class="form" novalidate autocomplete="on">
+            <div class="field" id="field-forgot-email">
+              <input type="email" id="forgot-email" name="email" class="field__input"
+                autocomplete="email" aria-required="true"
+                aria-describedby="forgot-email-error" placeholder=" " />
+              <label for="forgot-email" class="field__label">E-mail cadastrado</label>
+              <span class="field__bar" aria-hidden="true"></span>
+              <span id="forgot-email-error" class="field__error" role="alert" aria-live="assertive"></span>
+            </div>
+
+            <div id="forgot-message" class="form-message" aria-live="polite" role="status"></div>
+
+            <button type="submit" class="btn btn--primary btn--full" id="btn-forgot">
+              <span class="btn__label">Enviar instruções</span>
+              <span class="btn__ripple" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <div class="screen__footer screen__footer--center">
+            <button type="button" class="link-btn link-btn--back" id="go-login-from-forgot">
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+              Voltar para login
+            </button>
+          </div>
+        </section>
+
+        <!-- ===== TELA: BOAS-VINDAS ===== -->
+        <section id="screen-welcome" class="screen screen--welcome" aria-labelledby="welcome-title" role="region" aria-hidden="true">
+          <div class="welcome__icon" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="#e8f5e9"/>
+              <path d="M20 42 L33 55 L60 26" stroke="#2e7d32" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <h1 class="welcome__title" id="welcome-title">Bem-vindo(a)!</h1>
+          <p class="welcome__name" id="welcome-name"></p>
+          <p class="welcome__text">Você está autenticado com sucesso.</p>
+          <button type="button" class="btn btn--outline" id="btn-logout">
+            <span class="btn__label">Sair</span>
+            <span class="btn__ripple" aria-hidden="true"></span>
+          </button>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
