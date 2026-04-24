@@ -1,7 +1,8 @@
 {
-  "name": "vite-starter",
+  "name": "login-ui-ux",
+  "description": "Aplicação web de autenticação com Material Design e foco em acessibilidade (IHC)",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
