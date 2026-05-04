@@ -1,0 +1,49 @@
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 48px 24px;
+}
+
+.events-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr; /* Mobile: 1 col */
+}
+
+/* Tablet: 2 cols */
+@media (min-width: 600px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop: 3 or 4 cols */
+@media (min-width: 1024px) {
+    .events-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    .events-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Seat Map (Milestone 3) */
+.map-grid {
+    display: grid;
+    /* grid-template-columns set via JS */
+    gap: 12px;
+    justify-content: center;
+    padding: 24px;
+    background: var(--surface-variant);
+    border-radius: 16px;
+    min-width: max-content; /* Permite scroll se exceder */
+}
+
+.map-wrapper {
+    /* Força barra de rolagem horizontal se grid estourar */
+    overflow-x: auto;
+    width: 100%;
+}
