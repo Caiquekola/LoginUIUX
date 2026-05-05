@@ -151,55 +151,61 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
                   (blur)="touchField('cardNumber')"
                 >
                 <mat-icon matSuffix>credit_card</mat-icon>
-                <mat-hint>Use apenas números. A máscara é aplicada automaticamente.</mat-hint>
-                <mat-error *ngIf="shouldShowError('cardNumber', cardNumberModel)">
-                  {{ cardNumberError }}
-                </mat-error>
+                <mat-hint *ngIf="!shouldShowError('cardNumber', cardNumberModel)">
+                  Use apenas números. A máscara é aplicada automaticamente.
+                </mat-hint>
               </mat-form-field>
+              <p class="field-error" *ngIf="shouldShowError('cardNumber', cardNumberModel)">
+                {{ cardNumberError }}
+              </p>
 
               <div class="form-row">
-                <mat-form-field appearance="outline" class="half-width">
-                  <mat-label>Validade</mat-label>
-                  <input
-                    matInput
-                    required
-                    inputmode="numeric"
-                    autocomplete="cc-exp"
-                    name="cardExpiry"
-                    placeholder="MM/AA"
-                    maxlength="5"
-                    #cardExpiryModel="ngModel"
-                    [ngModel]="cardExpiry"
-                    (ngModelChange)="onCardExpiryChange($event)"
-                    (blur)="touchField('cardExpiry')"
-                  >
-                  <mat-icon matSuffix>event</mat-icon>
-                  <mat-error *ngIf="shouldShowError('cardExpiry', cardExpiryModel)">
+                <div class="field-group">
+                  <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>Validade</mat-label>
+                    <input
+                      matInput
+                      required
+                      inputmode="numeric"
+                      autocomplete="cc-exp"
+                      name="cardExpiry"
+                      placeholder="MM/AA"
+                      maxlength="5"
+                      #cardExpiryModel="ngModel"
+                      [ngModel]="cardExpiry"
+                      (ngModelChange)="onCardExpiryChange($event)"
+                      (blur)="touchField('cardExpiry')"
+                    >
+                    <mat-icon matSuffix>event</mat-icon>
+                  </mat-form-field>
+                  <p class="field-error" *ngIf="shouldShowError('cardExpiry', cardExpiryModel)">
                     {{ cardExpiryError }}
-                  </mat-error>
-                </mat-form-field>
+                  </p>
+                </div>
 
-                <mat-form-field appearance="outline" class="half-width">
-                  <mat-label>CVV</mat-label>
-                  <input
-                    matInput
-                    required
-                    type="password"
-                    inputmode="numeric"
-                    autocomplete="cc-csc"
-                    name="cardCvv"
-                    placeholder="000"
-                    maxlength="4"
-                    #cardCvvModel="ngModel"
-                    [ngModel]="cardCvv"
-                    (ngModelChange)="onCardCvvChange($event)"
-                    (blur)="touchField('cardCvv')"
-                  >
-                  <mat-icon matSuffix>password</mat-icon>
-                  <mat-error *ngIf="shouldShowError('cardCvv', cardCvvModel)">
+                <div class="field-group">
+                  <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>CVV</mat-label>
+                    <input
+                      matInput
+                      required
+                      type="password"
+                      inputmode="numeric"
+                      autocomplete="cc-csc"
+                      name="cardCvv"
+                      placeholder="000"
+                      maxlength="4"
+                      #cardCvvModel="ngModel"
+                      [ngModel]="cardCvv"
+                      (ngModelChange)="onCardCvvChange($event)"
+                      (blur)="touchField('cardCvv')"
+                    >
+                    <mat-icon matSuffix>password</mat-icon>
+                  </mat-form-field>
+                  <p class="field-error" *ngIf="shouldShowError('cardCvv', cardCvvModel)">
                     {{ cardCvvError }}
-                  </mat-error>
-                </mat-form-field>
+                  </p>
+                </div>
               </div>
 
               <mat-form-field appearance="outline" class="full-width last-field">
@@ -217,11 +223,13 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
                   (blur)="touchField('cardName')"
                 >
                 <mat-icon matSuffix>person</mat-icon>
-                <mat-hint>Digite como aparece no cartão.</mat-hint>
-                <mat-error *ngIf="shouldShowError('cardName', cardNameModel)">
-                  {{ cardNameError }}
-                </mat-error>
+                <mat-hint *ngIf="!shouldShowError('cardName', cardNameModel)">
+                  Digite como aparece no cartão.
+                </mat-hint>
               </mat-form-field>
+              <p class="field-error" *ngIf="shouldShowError('cardName', cardNameModel)">
+                {{ cardNameError }}
+              </p>
             </mat-card-content>
           </mat-card>
 
@@ -251,7 +259,7 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
                 color="primary"
                 class="confirm-button"
                 type="submit"
-                [disabled]="isProcessing || !isFormValid()"
+                [disabled]="isProcessing"
               >
                 <mat-spinner *ngIf="isProcessing" diameter="20" class="spinner"></mat-spinner>
                 <span>{{ isProcessing ? 'Processando...' : 'Confirmar pagamento' }}</span>
@@ -537,11 +545,11 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
 
     .full-width {
       width: 100%;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
 
     .last-field {
-      margin-bottom: 0;
+      margin-bottom: 8px;
     }
 
     .form-row {
@@ -550,9 +558,33 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
       gap: 14px;
     }
 
+    .field-group {
+      min-width: 0;
+    }
+
     .half-width {
       width: 100%;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
+    }
+
+    .field-error {
+      display: flex;
+      align-items: center;
+      min-height: 18px;
+      margin: -2px 0 14px 2px;
+      color: #b3261e;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .field-error::before {
+      content: 'error_outline';
+      margin-right: 5px;
+      font-family: 'Material Icons';
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1;
     }
 
     .total-card {
