@@ -145,7 +145,7 @@ import { Category } from '../../models/ticket.model';
 
         <div class="map-container">
           <div class="stage-indicator">
-            <mat-icon>stage</mat-icon>
+            <mat-icon>mic</mat-icon>
             PALCO
           </div>
           <div id="mapa-container" class="seat-map"></div>

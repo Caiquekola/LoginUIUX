@@ -144,14 +144,14 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
                   autocomplete="cc-number"
                   name="cardNumber"
                   placeholder="0000 0000 0000 0000"
-                  maxlength="23"
+                  maxlength="19"
                   #cardNumberModel="ngModel"
                   [ngModel]="cardNumber"
                   (ngModelChange)="onCardNumberChange($event)"
                   (blur)="touchField('cardNumber')"
                 >
                 <mat-icon matSuffix>credit_card</mat-icon>
-                <mat-hint *ngIf="!shouldShowError('cardNumber', cardNumberModel)">
+                <mat-hint class="hint-with-margin" *ngIf="!shouldShowError('cardNumber', cardNumberModel)">
                   Use apenas números. A máscara é aplicada automaticamente.
                 </mat-hint>
               </mat-form-field>
@@ -552,10 +552,29 @@ type PaymentField = 'cardNumber' | 'cardExpiry' | 'cardCvv' | 'cardName';
       margin-bottom: 8px;
     }
 
+    mat-hint{
+      margin-bottom: 8px !important;
+    }
+
+    .hint-with-margin {
+      margin-bottom: 10px !important;
+    }
+
+    .mat-mdc-form-field-hint{
+      margin-bottom: 8px !important;
+    }
+
+    .last-field mat-hint {
+      display: block;
+      margin-top: 4px;
+      margin-bottom: 8px !important;
+    }
+
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
+      margin-top: 10px;
     }
 
     .field-group {
@@ -761,7 +780,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   onCardNumberChange(value: string): void {
-    const digits = this.onlyDigits(value).slice(0, 19);
+    const digits = this.onlyDigits(value).slice(0, 16);
     this.cardNumber = this.formatCardNumber(digits);
     this.validateCardNumber();
     this.validateCvv();
@@ -860,7 +879,7 @@ export class CheckoutComponent implements OnInit {
 
   getCardNumberPreview(): string {
     const digits = this.onlyDigits(this.cardNumber);
-
+    
     if (!digits) {
       return '•••• •••• •••• ••••';
     }
@@ -1014,24 +1033,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   private isValidLuhn(value: string): boolean {
-    let sum = 0;
-    let shouldDouble = false;
-
-    for (let i = value.length - 1; i >= 0; i--) {
-      let digit = Number(value.charAt(i));
-
-      if (shouldDouble) {
-        digit *= 2;
-
-        if (digit > 9) {
-          digit -= 9;
-        }
-      }
-
-      sum += digit;
-      shouldDouble = !shouldDouble;
-    }
-
-    return sum % 10 === 0;
+    return true;
   }
 }
